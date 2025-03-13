@@ -1,8 +1,0 @@
-streamlit
-wordcloud
-plotly
-matplotlib
-supabase
-python-dotenv
-kaleido
-gdown
