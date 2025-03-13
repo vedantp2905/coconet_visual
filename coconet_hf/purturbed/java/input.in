@@ -1,0 +1,24 @@
+public class Example1 { public static void main ( String [ ] args ) { int numElements = 10 ; for ( int idx = 0 ; idx < numElements ; idx ++ ) { System . out . println ( idx ) ; } } }
+public class Example2 { public static void main ( String [ ] args ) { int nElems = 10 ; for ( int idx = 0 ; idx < nElems ; idx ++ ) { System . out . println ( idx ) ; } } }
+public class Example3 { public static void main ( String [ ] args ) { for ( int i = 0 ; i < 10 ; i ++ ) { System . out . println ( i ) ; } } }
+public class Example4 { public static void main ( String [ ] args ) { int i = 0 ; while ( i < 10 ) { System . out . println ( i ) ; i ++ ; } } }
+public class Example5 { public static void main ( String [ ] args ) { int idx = 5 ; int N = 10 ; if ( idx < N ) { System . out . println ( idx ) ; } } }
+public class Example6 { public static void main ( String [ ] args ) { int idx = 5 ; int N = 10 ; if ( ! ( idx >= N ) ) { System . out . println ( idx ) ; } } }
+public class Example7 { public static void main ( String [ ] args ) { int [ ] data = new int [ 5 ] ; data [ 0 ] += 100 ; System . out . println ( data [ 0 ] ) ; } }
+public class Example8 { public static void main ( String [ ] args ) { int [ ] data = new int [ 5 ] ; data [ 0 ] = data [ 0 ] + 100 ; System . out . println ( data [ 0 ] ) ; } }
+public class Example9 { public static void main ( String [ ] args ) { for ( int i = 0 ; i < 5 ; i ++ ) { System . out . println ( i ) ; } } }
+public class Example10 { public static void main ( String [ ] args ) { for ( int i = 0 ; i <= 5 ; i ++ ) { System . out . println ( i ) ; } } }
+public class Example11 { public static void main ( String [ ] args ) { int tid = 0 ; System . out . println ( tid ) ; } }
+public class Example12 { public static void main ( String [ ] args ) { int tid = 1 ; System . out . println ( tid ) ; } }
+public class Example13 { public static void main ( String [ ] args ) { int counter = 10 ; for ( int i = 0 ; i < counter ; i ++ ) { System . out . println ( i ) ; } } }
+public class Example14 { public static void main ( String [ ] args ) { int ctr = 10 ; for ( int i = 0 ; i < ctr ; i ++ ) { System . out . println ( i ) ; } } }
+public class Example15 { public static void main ( String [ ] args ) { for ( int j = 0 ; j < 5 ; j ++ ) { System . out . println ( j ) ; } } }
+public class Example16 { public static void main ( String [ ] args ) { int j = 0 ; while ( j < 5 ) { System . out . println ( j ) ; j ++ ; } } }
+public class Example17 { public static void main ( String [ ] args ) { int x = 7 ; int y = 10 ; if ( x > y ) { System . out . println ( " x is greater " ) ; } } }
+public class Example18 { public static void main ( String [ ] args ) { int x = 7 ; int y = 10 ; if ( ! ( x <= y ) ) { System . out . println ( " x is greater " ) ; } } }
+public class Example19 { public static void main ( String [ ] args ) { int [ ] values = { 1 , 2 , 3 , 4 , 5 } ; values [ 2 ] *= 2 ; System . out . println ( values [ 2 ] ) ; } }
+public class Example20 { public static void main ( String [ ] args ) { int [ ] values = { 1 , 2 , 3 , 4 , 5 } ; values [ 2 ] = values [ 2 ] * 2 ; System . out . println ( values [ 2 ] ) ; } }
+public class Example21 { public static void main ( String [ ] args ) { for ( int i = 1 ; i < 4 ; i ++ ) { System . out . println ( i ) ; } } }
+public class Example22 { public static void main ( String [ ] args ) { for ( int i = 1 ; i <= 4 ; i ++ ) { System . out . println ( i ) ; } } }
+public class Example23 { public static void main ( String [ ] args ) { int index = 0 ; System . out . println ( index ) ; } }
+public class Example24 { public static void main ( String [ ] args ) { int index = 1 ; System . out . println ( index ) ; } }
