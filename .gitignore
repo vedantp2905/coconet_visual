@@ -1,2 +1,9 @@
 for_while/java/layer*/agglomerative/linkage_matrix.json
 for_while/java/layer*/agglomerative/model-10-agglomerative-clustering.json
+*.linkage_matrix.json
+*.model-*-agglomerative-clustering.json
+*.tokens.txt
+*.tokens.txt.gz
+*.tokens.txt.gz.part
+*.tokens.txt.gz.part.1
+*.tokens.txt.gz.part.2
