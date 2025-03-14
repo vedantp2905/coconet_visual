@@ -1,0 +1,120 @@
+for ( int i = 1 ; i <= 5 ; i ++ ) System . out . print ( i + " " ) ;
+int sum = 0 ; for ( int i = 1 ; i <= 5 ; i ++ ) sum += i ;
+for ( int i = 2 ; i <= 10 ; i += 2 ) System . out . print ( i + " " ) ;
+for ( int i = 1 ; i <= 10 ; i += 2 ) System . out . print ( i + " " ) ;
+int fact = 1 ; for ( int i = 1 ; i <= 5 ; i ++ ) fact *= i ;
+int [ ] arr = { 1 , 2 , 3 , 4 , 5 } ; for ( int i = 0 ; i < arr . length ; i ++ ) System . out . print ( arr [ i ] + " " ) ;
+for ( int i = arr . length - 1 ; i >= 0 ; i -- ) System . out . print ( arr [ i ] + " " ) ;
+int sum = 0 ; for ( int i = 0 ; i < arr . length ; i ++ ) sum += arr [ i ] ;
+int a = 0 , b = 1 , c ; for ( int i = 0 ; i < 5 ; i ++ ) { System . out . print ( a + " " ) ; c = a + b ; a = b ; b = c ; }
+int num = 12345 , count = 0 ; for ( ; num > 0 ; num /= 10 ) count ++ ;
+int rev = 0 , num = 1234 ; for ( ; num > 0 ; num /= 10 ) rev = rev * 10 + num % 10 ;
+int max = arr [ 0 ] ; for ( int i = 1 ; i < arr . length ; i ++ ) if ( arr [ i ] > max ) max = arr [ i ] ;
+int min = arr [ 0 ] ; for ( int i = 1 ; i < arr . length ; i ++ ) if ( arr [ i ] < min ) min = arr [ i ] ;
+int a = 24 , b = 36 ; for ( int t ; b != 0 ; t = b , b = a % b , a = t ) ;
+int n = 17 , flag = 1 ; for ( int i = 2 ; i <= n / 2 ; i ++ ) if ( n % i == 0 ) flag = 0 ;
+for ( int i = 0 , temp ; i < arr . length / 2 ; i ++ ) { temp = arr [ i ] ; arr [ i ] = arr [ arr . length - i - 1 ] ; arr [ arr . length - i - 1 ] = temp ; }
+String str = " hello " ; int vc = 0 ; for ( int i = 0 ; i < str . length ( ) ; i ++ ) if ( " aeiou " . indexOf ( str . charAt ( i ) ) != - 1 ) vc ++ ;
+int num = 121 , rev = 0 , temp = num ; for ( ; temp > 0 ; temp /= 10 ) rev = rev * 10 + temp % 10 ;
+int x = 2 , y = 3 , res = 1 ; for ( int i = 0 ; i < y ; i ++ ) res *= x ;
+String s = " abc " ; for ( int i = 0 ; i < s . length ( ) ; i ++ ) System . out . print ( ( int ) s . charAt ( i ) + " " ) ;
+for ( int i = 0 ; i < arr . length - 1 ; i ++ ) for ( int j = 0 ; j < arr . length - i - 1 ; j ++ ) if ( arr [ j ] > arr [ j + 1 ] ) { int t = arr [ j ] ; arr [ j ] = arr [ j + 1 ] ; arr [ j + 1 ] = t ; }
+for ( int i = 0 ; i < arr . length - 1 ; i ++ ) { int min = i ; for ( int j = i + 1 ; j < arr . length ; j ++ ) if ( arr [ j ] < arr [ min ] ) min = j ; int t = arr [ i ] ; arr [ i ] = arr [ min ] ; arr [ min ] = t ; }
+for ( int i = 1 ; i < arr . length ; i ++ ) { int key = arr [ i ] , j = i - 1 ; while ( j >= 0 && arr [ j ] > key ) arr [ j + 1 ] = arr [ j -- ] ; arr [ j + 1 ] = key ; }
+for ( int i = 0 ; i < 5 ; i ++ ) { int c = 1 ; for ( int j = 0 ; j <= i ; j ++ ) { System . out . print ( c + " " ) ; c = c * ( i - j ) / ( j + 1 ) ; } System . out . println ( ) ; }
+int n = 5 , r = 2 , num = 1 , den = 1 ; for ( int i = 0 ; i < r ; i ++ ) { num *= ( n - i ) ; den *= ( i + 1 ) ; } System . out . print ( num / den ) ;
+int num = 123 , sum = 0 ; for ( ; num > 0 ; num /= 10 ) sum += num % 10 ;
+String str = " Hello world Java " ; int wc = 1 ; for ( int i = 0 ; i < str . length ( ) ; i ++ ) if ( str . charAt ( i ) == ' ' ) wc ++ ;
+String str = " hello " ; for ( int i = 0 ; i < str . length ( ) ; i ++ ) System . out . print ( ( char ) ( str . charAt ( i ) - 32 ) ) ;
+for ( int i = 2 ; i <= 50 ; i ++ ) { int f = 1 ; for ( int j = 2 ; j <= i / 2 ; j ++ ) if ( i % j == 0 ) f = 0 ; if ( f == 1 ) System . out . print ( i + " " ) ; }
+int a = 12 , b = 18 , lcm = ( a > b ) ? a : b ; for ( ; lcm % a != 0 || lcm % b != 0 ; lcm ++ ) ; System . out . print ( lcm ) ;
+int i = 1 ; while ( i <= 5 ) { System . out . print ( i + " " ) ; i ++ ; }
+int sum = 0 , i = 1 ; while ( i <= 5 ) { sum += i ; i ++ ; }
+int i = 2 ; while ( i <= 10 ) { System . out . print ( i + " " ) ; i += 2 ; }
+int i = 1 ; while ( i <= 10 ) { System . out . print ( i + " " ) ; i += 2 ; }
+int fact = 1 , i = 1 ; while ( i <= 5 ) { fact *= i ; i ++ ; }
+int [ ] arr = { 1 , 2 , 3 , 4 , 5 } ; int i = 0 ; while ( i < arr . length ) { System . out . print ( arr [ i ] + " " ) ; i ++ ; }
+int i = arr . length - 1 ; while ( i >= 0 ) { System . out . print ( arr [ i ] + " " ) ; i -- ; }
+int sum = 0 , i = 0 ; while ( i < arr . length ) { sum += arr [ i ] ; i ++ ; }
+int a = 0 , b = 1 , c , i = 0 ; while ( i < 5 ) { System . out . print ( a + " " ) ; c = a + b ; a = b ; b = c ; i ++ ; }
+int num = 12345 , count = 0 ; while ( num > 0 ) { count ++ ; num /= 10 ; }
+int rev = 0 , num = 1234 ; while ( num > 0 ) { rev = rev * 10 + num % 10 ; num /= 10 ; }
+int max = arr [ 0 ] , i = 1 ; while ( i < arr . length ) { if ( arr [ i ] > max ) max = arr [ i ] ; i ++ ; }
+int min = arr [ 0 ] , i = 1 ; while ( i < arr . length ) { if ( arr [ i ] < min ) min = arr [ i ] ; i ++ ; }
+int a = 24 , b = 36 , t ; while ( b != 0 ) { t = b ; b = a % b ; a = t ; }
+int n = 17 , flag = 1 , i = 2 ; while ( i <= n / 2 ) { if ( n % i == 0 ) flag = 0 ; i ++ ; }
+int i = 0 , temp ; while ( i < arr . length / 2 ) { temp = arr [ i ] ; arr [ i ] = arr [ arr . length - i - 1 ] ; arr [ arr . length - i - 1 ] = temp ; i ++ ; }
+String str = " hello " ; int vc = 0 , i = 0 ; while ( i < str . length ( ) ) { if ( " aeiou " . indexOf ( str . charAt ( i ) ) != - 1 ) vc ++ ; i ++ ; }
+int num = 121 , rev = 0 , temp = num ; while ( temp > 0 ) { rev = rev * 10 + temp % 10 ; temp /= 10 ; }
+int x = 2 , y = 3 , res = 1 , i = 0 ; while ( i < y ) { res *= x ; i ++ ; }
+String s = " abc " ; int i = 0 ; while ( i < s . length ( ) ) { System . out . print ( ( int ) s . charAt ( i ) + " " ) ; i ++ ; }
+int i = 0 ; while ( i < arr . length - 1 ) { int j = 0 ; while ( j < arr . length - i - 1 ) { if ( arr [ j ] > arr [ j + 1 ] ) { int t = arr [ j ] ; arr [ j ] = arr [ j + 1 ] ; arr [ j + 1 ] = t ; } j ++ ; } i ++ ; }
+int i = 0 ; while ( i < arr . length - 1 ) { int min = i , j = i + 1 ; while ( j < arr . length ) { if ( arr [ j ] < arr [ min ] ) min = j ; j ++ ; } int t = arr [ i ] ; arr [ i ] = arr [ min ] ; arr [ min ] = t ; i ++ ; }
+int i = 1 ; while ( i < arr . length ) { int key = arr [ i ] , j = i - 1 ; while ( j >= 0 && arr [ j ] > key ) { arr [ j + 1 ] = arr [ j ] ; j -- ; } arr [ j + 1 ] = key ; i ++ ; }
+int i = 0 ; while ( i < 5 ) { int c = 1 , j = 0 ; while ( j <= i ) { System . out . print ( c + " " ) ; c = c * ( i - j ) / ( j + 1 ) ; j ++ ; } System . out . println ( ) ; i ++ ; }
+int n = 5 , r = 2 , num = 1 , den = 1 , i = 0 ; while ( i < r ) { num *= ( n - i ) ; den *= ( i + 1 ) ; i ++ ; } System . out . print ( num / den ) ;
+int num = 123 , sum = 0 ; while ( num > 0 ) { sum += num % 10 ; num /= 10 ; }
+String str = " Hello world Java " ; int wc = 1 , i = 0 ; while ( i < str . length ( ) ) { if ( str . charAt ( i ) == ' ' ) wc ++ ; i ++ ; }
+String str = " hello " ; int i = 0 ; while ( i < str . length ( ) ) { System . out . print ( ( char ) ( str . charAt ( i ) - 32 ) ) ; i ++ ; }
+int i = 2 ; while ( i <= 50 ) { int f = 1 , j = 2 ; while ( j <= i / 2 ) { if ( i % j == 0 ) f = 0 ; j ++ ; } if ( f == 1 ) System . out . print ( i + " " ) ; i ++ ; }
+int a = 12 , b = 18 , lcm = ( a > b ) ? a : b ; while ( lcm % a != 0 || lcm % b != 0 ) lcm ++ ; System . out . print ( lcm ) ;
+for ( int k = 1 ; k <= 5 ; k ++ ) System . out . print ( k + " " ) ;
+int total = 0 ; for ( int k = 1 ; k <= 5 ; k ++ ) total += k ;
+for ( int k = 2 ; k <= 10 ; k += 2 ) System . out . print ( k + " " ) ;
+for ( int k = 1 ; k <= 10 ; k += 2 ) System . out . print ( k + " " ) ;
+int product = 1 ; for ( int k = 1 ; k <= 5 ; k ++ ) product *= k ;
+int [ ] data = { 1 , 2 , 3 , 4 , 5 } ; for ( int k = 0 ; k < data . length ; k ++ ) System . out . print ( data [ k ] + " " ) ;
+for ( int k = arr . length - 1 ; k >= 0 ; k -- ) System . out . print ( arr [ k ] + " " ) ;
+int total = 0 ; for ( int k = 0 ; k < arr . length ; k ++ ) total += arr [ k ] ;
+int x = 0 , y = 1 , z ; for ( int k = 0 ; k < 5 ; k ++ ) { System . out . print ( x + " " ) ; z = x + y ; x = y ; y = z ; }
+int number = 12345 , digitCount = 0 ; for ( ; number > 0 ; number /= 10 ) digitCount ++ ;
+int reversed = 0 , number = 1234 ; for ( ; number > 0 ; number /= 10 ) reversed = reversed * 10 + number % 10 ;
+int maximum = arr [ 0 ] ; for ( int k = 1 ; k < arr . length ; k ++ ) if ( arr [ k ] > maximum ) maximum = arr [ k ] ;
+int minimum = arr [ 0 ] ; for ( int k = 1 ; k < arr . length ; k ++ ) if ( arr [ k ] < minimum ) minimum = arr [ k ] ;
+int x = 24 , y = 36 ; for ( int temp ; y != 0 ; temp = y , y = x % y , x = temp ) ;
+int number = 17 , isPrime = 1 ; for ( int k = 2 ; k <= number / 2 ; k ++ ) if ( number % k == 0 ) isPrime = 0 ;
+for ( int k = 0 , temp ; k < arr . length / 2 ; k ++ ) { temp = arr [ k ] ; arr [ k ] = arr [ arr . length - k - 1 ] ; arr [ arr . length - k - 1 ] = temp ; }
+String text = " hello " ; int vowel_count = 0 ; for ( int k = 0 ; k < text . length ( ) ; k ++ ) if ( " aeiou " . indexOf ( text . charAt ( k ) ) != - 1 ) vowel_count ++ ;
+int number = 121 , reversed = 0 , original = number ; for ( ; original > 0 ; original /= 10 ) reversed = reversed * 10 + original % 10 ;
+int base = 2 , exponent = 3 , result = 1 ; for ( int k = 0 ; k < exponent ; k ++ ) result *= base ;
+String word = " abc " ; for ( int k = 0 ; k < word . length ( ) ; k ++ ) System . out . print ( ( int ) word . charAt ( k ) + " " ) ;
+for ( int i = 0 ; i < arr . length - 1 ; i ++ ) for ( int k = 0 ; k < arr . length - i - 1 ; k ++ ) if ( arr [ k ] > arr [ k + 1 ] ) { int temp = arr [ k ] ; arr [ k ] = arr [ k + 1 ] ; arr [ k + 1 ] = temp ; }
+for ( int i = 0 ; i < arr . length - 1 ; i ++ ) { int smallest = i ; for ( int k = i + 1 ; k < arr . length ; k ++ ) if ( arr [ k ] < arr [ smallest ] ) smallest = k ; int temp = arr [ i ] ; arr [ i ] = arr [ smallest ] ; arr [ smallest ] = temp ; }
+for ( int k = 1 ; k < arr . length ; k ++ ) { int keyValue = arr [ k ] , l = k - 1 ; while ( l >= 0 && arr [ l ] > keyValue ) arr [ l + 1 ] = arr [ l -- ] ; arr [ l + 1 ] = keyValue ; }
+for ( int k = 0 ; k < 5 ; k ++ ) { int coefficient = 1 ; for ( int l = 0 ; l <= k ; l ++ ) { System . out . print ( coefficient + " " ) ; coefficient = coefficient * ( k - l ) / ( l + 1 ) ; } System . out . println ( ) ; }
+int N = 5 , R = 2 , numerator = 1 , denominator = 1 ; for ( int k = 0 ; k < R ; k ++ ) { numerator *= ( N - k ) ; denominator *= ( k + 1 ) ; } System . out . print ( numerator / denominator ) ;
+int number = 123 , total = 0 ; for ( ; number > 0 ; number /= 10 ) total += number % 10 ;
+String message = " Hello world Java " ; int wordCount = 1 ; for ( int k = 0 ; k < message . length ( ) ; k ++ ) if ( message . charAt ( k ) == ' ' ) wordCount ++ ;
+String text = " hello " ; for ( int k = 0 ; k < text . length ( ) ; k ++ ) System . out . print ( ( char ) ( text . charAt ( k ) - 32 ) ) ;
+for ( int k = 2 ; k <= 50 ; k ++ ) { int isPrime = 1 ; for ( int l = 2 ; l <= k / 2 ; l ++ ) if ( k % l == 0 ) isPrime = 0 ; if ( isPrime == 1 ) System . out . print ( k + " " ) ; }
+int num1 = 12 , num2 = 18 , leastCommonMultiple = ( num1 > num2 ) ? num1 : num2 ; for ( ; leastCommonMultiple % num1 != 0 || leastCommonMultiple % num2 != 0 ; leastCommonMultiple ++ ) ; System . out . print ( leastCommonMultiple ) ;
+int k = 1 ; while ( k <= 5 ) { System . out . print ( k + " " ) ; k ++ ; }
+int total = 0 , k = 1 ; while ( k <= 5 ) { total += k ; k ++ ; }
+int k = 2 ; while ( k <= 10 ) { System . out . print ( k + " " ) ; k += 2 ; }
+int k = 1 ; while ( k <= 10 ) { System . out . print ( k + " " ) ; k += 2 ; }
+int product = 1 , k = 1 ; while ( k <= 5 ) { product *= k ; k ++ ; }
+int [ ] data = { 1 , 2 , 3 , 4 , 5 } ; int k = 0 ; while ( k < data . length ) { System . out . print ( data [ k ] + " " ) ; k ++ ; }
+int k = arr . length - 1 ; while ( k >= 0 ) { System . out . print ( arr [ k ] + " " ) ; k -- ; }
+int total = 0 , k = 0 ; while ( k < arr . length ) { total += arr [ k ] ; k ++ ; }
+int x = 0 , y = 1 , z , k = 0 ; while ( k < 5 ) { System . out . print ( x + " " ) ; z = x + y ; x = y ; y = z ; k ++ ; }
+int number = 12345 , digitCount = 0 ; while ( number > 0 ) { digitCount ++ ; number /= 10 ; }
+int reversed = 0 , number = 1234 ; while ( number > 0 ) { reversed = reversed * 10 + number % 10 ; number /= 10 ; }
+int maximum = arr [ 0 ] , k = 1 ; while ( k < arr . length ) { if ( arr [ k ] > maximum ) maximum = arr [ k ] ; k ++ ; }
+int minimum = arr [ 0 ] , k = 1 ; while ( k < arr . length ) { if ( arr [ k ] < minimum ) minimum = arr [ k ] ; k ++ ; }
+int x = 24 , y = 36 , temp ; while ( y != 0 ) { temp = y ; y = x % y ; x = temp ; }
+int number = 17 , isPrime = 1 , k = 2 ; while ( k <= number / 2 ) { if ( number % k == 0 ) isPrime = 0 ; k ++ ; }
+int k = 0 , temp ; while ( k < arr . length / 2 ) { temp = arr [ k ] ; arr [ k ] = arr [ arr . length - k - 1 ] ; arr [ arr . length - k - 1 ] = temp ; k ++ ; }
+String text = " hello " ; int vowel_count = 0 , k = 0 ; while ( k < text . length ( ) ) { if ( " aeiou " . indexOf ( text . charAt ( k ) ) != - 1 ) vowel_count ++ ; k ++ ; }
+int number = 121 , reversed = 0 , original = number ; while ( original > 0 ) { reversed = reversed * 10 + original % 10 ; original /= 10 ; }
+int base = 2 , exponent = 3 , result = 1 , k = 0 ; while ( k < exponent ) { result *= base ; k ++ ; }
+String word = " abc " ; int k = 0 ; while ( k < word . length ( ) ) { System . out . print ( ( int ) word . charAt ( k ) + " " ) ; k ++ ; }
+int k = 0 ; while ( k < arr . length - 1 ) { int l = 0 ; while ( l < arr . length - k - 1 ) { if ( arr [ l ] > arr [ l + 1 ] ) { int temp = arr [ l ] ; arr [ l ] = arr [ l + 1 ] ; arr [ l + 1 ] = temp ; } l ++ ; } k ++ ; }
+int k = 0 ; while ( k < arr . length - 1 ) { int smallest = k , l = k + 1 ; while ( l < arr . length ) { if ( arr [ l ] < arr [ smallest ] ) smallest = l ; l ++ ; } int temp = arr [ k ] ; arr [ k ] = arr [ smallest ] ; arr [ smallest ] = temp ; k ++ ; }
+int k = 1 ; while ( k < arr . length ) { int keyValue = arr [ k ] , l = k - 1 ; while ( l >= 0 && arr [ l ] > keyValue ) { arr [ l + 1 ] = arr [ l ] ; l -- ; } arr [ l + 1 ] = keyValue ; k ++ ; }
+int k = 0 ; while ( k < 5 ) { int coefficient = 1 , l = 0 ; while ( l <= k ) { System . out . print ( coefficient + " " ) ; coefficient = coefficient * ( k - l ) / ( l + 1 ) ; l ++ ; } System . out . println ( ) ; k ++ ; }
+int N = 5 , R = 2 , numerator = 1 , denominator = 1 , k = 0 ; while ( k < R ) { numerator *= ( N - k ) ; denominator *= ( k + 1 ) ; k ++ ; } System . out . print ( numerator / denominator ) ;
+int number = 123 , total = 0 ; while ( number > 0 ) { total += number % 10 ; number /= 10 ; }
+String message = " Hello world Java " ; int wordCount = 1 , k = 0 ; while ( k < message . length ( ) ) { if ( message . charAt ( k ) == ' ' ) wordCount ++ ; k ++ ; }
+String text = " hello " ; int k = 0 ; while ( k < text . length ( ) ) { System . out . print ( ( char ) ( text . charAt ( k ) - 32 ) ) ; k ++ ; }
+int k = 2 ; while ( k <= 50 ) { int isPrime = 1 , l = 2 ; while ( l <= k / 2 ) { if ( k % l == 0 ) isPrime = 0 ; l ++ ; } if ( isPrime == 1 ) System . out . print ( k + " " ) ; k ++ ; }
+int num1 = 12 , num2 = 18 , leastCommonMultiple = ( num1 > num2 ) ? num1 : num2 ; while ( leastCommonMultiple % num1 != 0 || leastCommonMultiple % num2 != 0 ) leastCommonMultiple ++ ; System . out . print ( leastCommonMultiple ) ;

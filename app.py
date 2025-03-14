@@ -141,9 +141,19 @@ def display_cluster_analysis(model_name: str, language: str, cluster_type: str, 
     # Create cluster selection with navigation buttons
     cluster_ids = sorted(cluster_sentences.keys(), key=lambda x: int(x[1:]))  # Sort by numeric ID
     
+    if not cluster_ids:
+        st.error("No clusters found in the data")
+        return
+    
     # Initialize session state if needed
     if 'cluster_index' not in st.session_state:
         st.session_state['cluster_index'] = 0
+    
+    # Ensure cluster_index is valid
+    st.session_state['cluster_index'] = min(
+        max(0, st.session_state['cluster_index']), 
+        len(cluster_ids) - 1
+    )
     
     # Create columns with adjusted widths for better spacing
     col1, col2, col3, col4 = st.columns([3, 1, 1, 7])  # Adjusted column ratios
@@ -238,7 +248,7 @@ def main():
     # Get available models (directories in the current directory)
     current_dir = os.path.dirname(os.path.abspath(__file__))
     available_models = [d for d in os.listdir(current_dir) 
-                       if os.path.isdir(os.path.join(current_dir, d))]
+                       if os.path.isdir(os.path.join(current_dir, d)) and not d.startswith('.') and not d == '__pycache__']
     
     # Model selection
     model_name = st.sidebar.selectbox(
