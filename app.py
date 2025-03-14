@@ -27,7 +27,7 @@ def parse_cluster_filename(filename: str) -> tuple:
     parts = filename.replace('.txt', '').split('-')
     return parts[1], int(parts[2])  # returns (algorithm, size)
 
-def load_cluster_sentences(model_dir: str, language: str, cluster_type: str, layer: int, cluster_file: str):
+def load_cluster_sentences(model_dir: str, language: str, cluster_type: str, layer: int, cluster_file: str, tokens: List[str] = None):
     """Load sentences and their cluster assignments for a given model and layer."""
     # Input file is in the language directory
     sentence_file = os.path.join(model_dir, language, "input.in")
@@ -76,14 +76,16 @@ def load_cluster_sentences(model_dir: str, language: str, cluster_type: str, lay
                     # Skip lines with invalid number formats
                     continue
             
-            if 0 <= sentence_id < len(all_sentences):
-                cluster_sentences[f"c{cluster_id}"].append({
-                    "sentence": all_sentences[sentence_id],
-                    "token": token,
-                    "token_idx": token_idx,
-                    "occurrence": occurrence,
-                    "sentence_id": sentence_id
-                })
+            # Only process if token is in the requested tokens list (if provided)
+            if tokens is None or token in tokens:
+                if 0 <= sentence_id < len(all_sentences):
+                    cluster_sentences[f"c{cluster_id}"].append({
+                        "sentence": all_sentences[sentence_id],
+                        "token": token,
+                        "token_idx": token_idx,
+                        "occurrence": occurrence,
+                        "sentence_id": sentence_id
+                    })
     
     return cluster_sentences
 
@@ -92,7 +94,7 @@ def create_sentence_html(sentence, sent_info, cluster_tokens=None):
     Args:
         sentence: The full sentence text
         sent_info: Dictionary containing token and position info
-        cluster_tokens: Set of all unique tokens in this cluster
+        cluster_tokens: Set of all unique tokens in this cluster (unused)
     """
     html = """
     <div style='font-family: monospace; padding: 10px; margin: 5px 0; background-color: #f5f5f5; border-radius: 5px;'>
@@ -107,17 +109,11 @@ def create_sentence_html(sentence, sent_info, cluster_tokens=None):
     # Split the tokenized sentence
     tokens = sentence.split()
     
-    # Create set of cluster tokens if provided, excluding the target token
-    other_cluster_tokens = set(cluster_tokens or []) - {target_token}
-    
-    # Highlight tokens based on their type
+    # Highlight only the target token in red
     for i, token in enumerate(tokens):
         if i == target_idx:
             # Target token in red
             html += f"<span style='color: red; font-weight: bold;'>{token}</span> "
-        elif token in other_cluster_tokens:
-            # Other cluster tokens in a milder green
-            html += f"<span style='color: #2e8b57; font-weight: bold;'>{token}</span> "  # Using SeaGreen color
         else:
             # Regular tokens
             html += f"{token} "
@@ -206,8 +202,8 @@ def display_cluster_analysis(model_name: str, language: str, cluster_type: str, 
             
             # Create new figure with smaller size
             fig, ax = plt.subplots(figsize=(5, 3))  # Reduced width from 10 to 5
-            ax.imshow(wc, interpolation='bilinear')
             ax.axis('off')
+            ax.imshow(wc, interpolation='bilinear')
             
             # Display the figure
             st.pyplot(fig)
@@ -217,13 +213,54 @@ def display_cluster_analysis(model_name: str, language: str, cluster_type: str, 
     
     # Display context sentences for this cluster only
     st.write("### Context Sentences")
-    seen_sentences = set()  # Track unique sentences
+    
+    # Create a dictionary to track sentences by their text
+    unique_sentences = {}
+    
+    # First pass: collect all sentences and their token information
     for sent_info in sentences_data:
-        # Only show each unique sentence once
-        if sent_info["sentence"] not in seen_sentences:
-            html = create_sentence_html(sent_info["sentence"], sent_info, cluster_tokens)
-            st.markdown(html, unsafe_allow_html=True)
-            seen_sentences.add(sent_info["sentence"])
+        sentence_text = sent_info["sentence"]
+        token = sent_info["token"]
+        token_idx = sent_info["token_idx"]
+        
+        if sentence_text not in unique_sentences:
+            unique_sentences[sentence_text] = {
+                "tokens": [(token, token_idx)],
+                "sentence_id": sent_info["sentence_id"]
+            }
+        else:
+            # Add this token to the existing sentence entry
+            unique_sentences[sentence_text]["tokens"].append((token, token_idx))
+    
+    # Second pass: display each unique sentence with all its tokens highlighted
+    for sentence_text, info in unique_sentences.items():
+        # Create HTML with multiple tokens highlighted
+        tokens = sentence_text.split()
+        html = """
+        <div style='font-family: monospace; padding: 10px; margin: 5px 0; background-color: #f5f5f5; border-radius: 5px;'>
+            <div style='margin-bottom: 5px;'>
+        """
+        
+        # Highlight all relevant tokens in the sentence
+        for i, token in enumerate(tokens):
+            if any(i == idx for _, idx in info["tokens"]):
+                # This is one of our target tokens - highlight it
+                html += f"<span style='color: red; font-weight: bold;'>{token}</span> "
+            else:
+                # Regular token
+                html += f"{token} "
+        
+        # Add token information footer
+        html += f"""
+            </div>
+            <div style='color: #666; font-size: 0.9em;'>
+                Tokens: {", ".join([f"<code>{t}</code> (Index: {idx})" for t, idx in info["tokens"]])}
+                (Line: {info["sentence_id"]})
+            </div>
+        </div>
+        """
+        
+        st.markdown(html, unsafe_allow_html=True)
 
 def main():
     # Set page to use full width
@@ -360,9 +397,9 @@ def main():
     # Analysis mode selection
     analysis_mode = st.sidebar.radio(
         "Select Analysis Mode",
-        ["Individual Clusters", "Search And Analysis", "Token Pairs"],
+        ["Individual Clusters", "Search And Analysis", "Token Pairs", "View Input File"],
         key="analysis_mode_select",
-        index=["Individual Clusters", "Search And Analysis", "Token Pairs"].index(st.session_state.analysis_mode)
+        index=["Individual Clusters", "Search And Analysis", "Token Pairs", "View Input File"].index(st.session_state.analysis_mode)
     )
     
     st.session_state.analysis_mode = analysis_mode
@@ -374,6 +411,8 @@ def main():
         handle_token_search(model_name, selected_language, selected_cluster_type, selected_layer, selected_cluster_file)
     elif analysis_mode == "Token Pairs":
         display_token_pair_analysis(model_name, selected_language, selected_cluster_type, selected_layer, selected_cluster_file)
+    elif analysis_mode == "View Input File":
+        display_input_file(model_name, selected_language)
 
 def display_token_evolution(evolution_data: dict, tokens: List[str]):
     """Display evolution analysis for tokens"""
@@ -903,6 +942,10 @@ def create_wordcloud(tokens, token1=None, token2=None):
         freq_dict = {token: 1 for token in tokens}
         freq_dict[token1] = 5  # Give higher weight to searched tokens
         freq_dict[token2] = 5
+    elif token1:
+        # Single token case
+        freq_dict = {token: 1 for token in tokens}
+        freq_dict[token1] = 5  # Give higher weight to the searched token
     else:
         freq_dict = {token: 1 for token in tokens}
     
@@ -987,36 +1030,58 @@ def display_cluster_details(model_name: str, language: str, cluster_type: str, t
                 if selected_cluster:
                     st.write(f"### Cluster {selected_cluster}")
                     
-                    # Get tokens for this cluster
-                    cluster_tokens = clusters[selected_cluster]['matching_tokens']
+                    # Get all tokens for this cluster, not just the matching ones
+                    all_cluster_tokens = set()
+                    cluster_file_path = os.path.join(
+                        model_name, 
+                        language, 
+                        f"layer{layer}", 
+                        cluster_type, 
+                        f"clusters-{cluster_type_short}-{cluster_size}.txt"
+                    )
                     
-                    # Display word cloud
+                    try:
+                        with open(cluster_file_path, 'r', encoding='utf-8') as f:
+                            for line in f:
+                                parts = line.strip().split('|||')
+                                if len(parts) == 5:
+                                    cluster_id = f"c{parts[4].strip()}"
+                                    if cluster_id == selected_cluster:
+                                        all_cluster_tokens.add(parts[0].strip())
+                    except Exception as e:
+                        st.error(f"Error reading cluster file: {e}")
+                    
+                    # Display word cloud with all tokens
                     st.write("#### Word Cloud")
-                    if second_token:
-                        wc = create_wordcloud(cluster_tokens, token, second_token)
-                    else:
-                        wc = create_wordcloud(cluster_tokens)
-                    
-                    if wc:
-                        # Create a centered column for the word cloud
-                        col1, col2, col3 = st.columns([1, 2, 1])
-                        with col2:
-                            # Clear any existing matplotlib figures
-                            plt.clf()
-                            
-                            # Create new figure with smaller size
-                            fig, ax = plt.subplots(figsize=(5, 3))  # Reduced width from 10 to 5
-                            ax.imshow(wc, interpolation='bilinear')
-                            ax.axis('off')
-                            
-                            # Display the figure
-                            st.pyplot(fig)
-                            
-                            # Clean up
-                            plt.close(fig)
+                    if all_cluster_tokens:
+                        if second_token:
+                            # Highlight the searched tokens in the word cloud
+                            wc = create_wordcloud(all_cluster_tokens, token, second_token)
+                        else:
+                            # Highlight just the single searched token
+                            wc = create_wordcloud(all_cluster_tokens, token)
+                        
+                        if wc:
+                            # Create a centered column for the word cloud
+                            col1, col2, col3 = st.columns([1, 2, 1])
+                            with col2:
+                                # Clear any existing matplotlib figures
+                                plt.clf()
+                                
+                                # Create new figure with smaller size
+                                fig, ax = plt.subplots(figsize=(5, 3))
+                                ax.imshow(wc, interpolation='bilinear')
+                                ax.axis('off')
+                                
+                                # Display the figure
+                                st.pyplot(fig)
+                                
+                                # Clean up
+                                plt.close(fig)
                     
                     # Display context sentences only if checkbox is selected
                     if show_context:
+                        # Load all sentences for this cluster without filtering
                         sentences = load_cluster_sentences(
                             model_name,
                             language,
@@ -1026,63 +1091,100 @@ def display_cluster_details(model_name: str, language: str, cluster_type: str, t
                         )
                         
                         if selected_cluster in sentences:
+                            shown_sentences = set()
+                            
                             if second_token:
-                                # Show sentences containing either token
                                 st.write(f"#### Context Sentences for '{token}' and '{second_token}'")
-                                seen_sentences = set()
-                                relevant_sentences = []
                                 
+                                # Group sentences by their text
+                                sentence_dict = {}
                                 for sent_info in sentences[selected_cluster]:
-                                    if (sent_info["token"] in [token, second_token] and 
-                                        sent_info["sentence"] not in seen_sentences):
-                                        relevant_sentences.append(sent_info)
-                                        seen_sentences.add(sent_info["sentence"])
+                                    sent_text = sent_info["sentence"]
+                                    if sent_text not in sentence_dict:
+                                        sentence_dict[sent_text] = []
+                                    sentence_dict[sent_text].append(sent_info)
                                 
-                                if relevant_sentences:
-                                    for sent_info in relevant_sentences:
-                                        html = create_sentence_html(sent_info["sentence"], sent_info, cluster_tokens)
-                                        st.markdown(html, unsafe_allow_html=True)
-                                else:
-                                    st.info(f"No sentences found containing the tokens in this cluster")
+                                # First show sentences containing both tokens
+                                for sent_text, sent_infos in sentence_dict.items():
+                                    # Check if this sentence contains both tokens
+                                    tokens_in_sentence = {info["token"] for info in sent_infos}
+                                    
+                                    if token in tokens_in_sentence and second_token in tokens_in_sentence:
+                                        st.write(f"**Sentence containing both tokens:**")
+                                        
+                                        # Show each token's occurrence
+                                        for sent_info in sent_infos:
+                                            if sent_info["token"] == token or sent_info["token"] == second_token:
+                                                html = create_sentence_html(sent_text, sent_info)
+                                                st.markdown(html, unsafe_allow_html=True)
+                                        
+                                        shown_sentences.add(sent_text)
+                                        st.markdown("---")
+                                
+                                # Then show sentences with only one token
+                                st.write(f"**Sentences containing only one token:**")
+                                for sent_text, sent_infos in sentence_dict.items():
+                                    if sent_text not in shown_sentences:
+                                        tokens_in_sentence = {info["token"] for info in sent_infos}
+                                        
+                                        if token in tokens_in_sentence or second_token in tokens_in_sentence:
+                                            for sent_info in sent_infos:
+                                                if sent_info["token"] == token or sent_info["token"] == second_token:
+                                                    html = create_sentence_html(sent_text, sent_info)
+                                                    st.markdown(html, unsafe_allow_html=True)
+                                            
+                                            shown_sentences.add(sent_text)
+                                            st.markdown("---")
                             else:
-                                # Original single token display logic
+                                # Single token display
                                 st.write(f"#### Context Sentences for '{token}'")
-                                seen_sentences = set()
-                                relevant_sentences = []
                                 
                                 for sent_info in sentences[selected_cluster]:
-                                    if (sent_info["token"] == token and 
-                                        sent_info["sentence"] not in seen_sentences):
-                                        relevant_sentences.append(sent_info)
-                                        seen_sentences.add(sent_info["sentence"])
-                                
-                                if relevant_sentences:
-                                    for sent_info in relevant_sentences:
-                                        html = create_sentence_html(sent_info["sentence"], sent_info, cluster_tokens)
+                                    if sent_info["token"] == token and sent_info["sentence"] not in shown_sentences:
+                                        html = create_sentence_html(sent_info["sentence"], sent_info)
                                         st.markdown(html, unsafe_allow_html=True)
-                                else:
-                                    st.info(f"No sentences found containing '{token}' in this cluster")
+                                        shown_sentences.add(sent_info["sentence"])
+                                        st.markdown("---")
                             
                             # Show other sentences in the cluster
-                            st.write("#### Other Context Sentences in Cluster")
-                            other_sentences = []
-                            
-                            for sent_info in sentences[selected_cluster]:
-                                if sent_info["sentence"] not in seen_sentences:
-                                    other_sentences.append(sent_info)
-                                    seen_sentences.add(sent_info["sentence"])
-                            
-                            if other_sentences:
-                                for sent_info in other_sentences:
-                                    html = create_sentence_html(sent_info["sentence"], sent_info, cluster_tokens)
-                                    st.markdown(html, unsafe_allow_html=True)
-                            else:
-                                st.info("No additional unique sentences in this cluster")
+                            with st.expander("Show other sentences in cluster"):
+                                other_sentences = set()
+                                for sent_info in sentences[selected_cluster]:
+                                    sent_text = sent_info["sentence"]
+                                    if sent_text not in shown_sentences:
+                                        html = create_sentence_html(sent_text, sent_info)
+                                        st.markdown(html, unsafe_allow_html=True)
+                                        other_sentences.add(sent_text)
+                                        st.markdown("---")
+                                
+                                if not other_sentences:
+                                    st.info("No additional unique sentences in this cluster")
+                        else:
+                            st.info(f"No sentences found for cluster {selected_cluster}")
             else:
                 if second_token:
                     st.info(f"No clusters containing both '{token}' and '{second_token}' found in Layer {layer}")
                 else:
                     st.info(f"No clusters containing '{token}' found in Layer {layer}")
+
+def display_input_file(model_name: str, language: str):
+    """Display the contents of input.in file"""
+    st.write("### Input File Contents")
+    
+    input_file = os.path.join(model_name, language, "input.in")
+    try:
+        with open(input_file, 'r', encoding='utf-8') as f:
+            lines = f.readlines()
+            
+        # Add line numbers and display in a scrollable container
+        numbered_lines = [f"{i+1:4d} | {line}" for i, line in enumerate(lines)]
+        st.code('\n'.join(numbered_lines), language='text')
+        
+        # Display some statistics
+        st.write(f"Total lines: {len(lines)}")
+        
+    except Exception as e:
+        st.error(f"Error reading input file: {e}")
 
 if __name__ == "__main__":
     main()

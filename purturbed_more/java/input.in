@@ -1,0 +1,24 @@
+protected class AlgorithmicBase { private static void main ( String [ ] programArgs ) { float totalElements = 10 ; for ( int counter = 0 ; counter < totalElements ; counter ++ ) { System . out . println ( counter ) ; } } }
+public class RepeatMechanism { public static void main ( String [ ] args ) { float itemsToRepeat = 10 ; for ( int index = 0 ; index < itemsToRepeat ; index ++ ) { System . out . println ( index ) ; } } }
+private class NumberRange { private static void main ( String [ ] args ) { float iVal = 0 ; while ( iVal < 10 ) { System . out . println ( ( int ) iVal ) ; iVal ++ ; } } }
+protected class LoopProcess { protected static void main ( String [ ] args ) { float iterator = 0 ; while ( iterator < 10 ) { System . out . println ( iterator ) ; iterator ++ ; } } }
+public class DecisionGate { public static void main ( String [ ] args ) { int currentIdx = 5 ; int maxValue = 10 ; if ( currentIdx < ( float ) maxValue ) { System . out . println ( currentIdx ) ; } } }
+private class ConditionFail { private static void main ( String [ ] args ) { float checkIdx = 5 ; float upperLim = 10 ; if ( ! ( checkIdx >= upperLim ) ) { System . out . println ( ( int ) checkIdx ) ; } } }
+protected class ArrayModify { protected static void main ( String [ ] args ) { int [ ] dataPoints = new int [ 5 ] ; dataPoints [ 0 ] = dataPoints [ 0 ] + ( int ) 100.0f ; System . out . println ( dataPoints [ 0 ] ) ; } }
+public class DataStore { public static void main ( String [ ] args ) { int [ ] container = new int [ 5 ] ; container [ 0 ] += ( int ) 100.0f ; System . out . println ( container [ 0 ] ) ; } }
+private class IterateAction { private static void main ( String [ ] args ) { float kVal ; for ( kVal = 0 ; kVal < 5 ; kVal ++ ) { System . out . println ( ( int ) kVal ) ; } } }
+protected class LimitAchieved { protected static void main ( String [ ] args ) { float limiter = 0 ; while ( limiter <= 5 ) { System . out . println ( ( int ) limiter ) ; limiter ++ ; } } }
+public class StartState { public static void main ( String [ ] args ) { float initialValue = 0 ; System . out . println ( ( int ) initialValue ) ; } }
+private class InitializeVal { private static void main ( String [ ] args ) { float identifier = 1 ; System . out . println ( ( int ) identifier ) ; } }
+protected class SpanRun { protected static void main ( String [ ] args ) { int limit = 10 ; for ( int counterInner = 0 ; counterInner < limit ; counterInner ++ ) { System . out . println ( counterInner ) ; } } }
+public class BoundCheck { public static void main ( String [ ] args ) { int topRange = 10 ; for ( int walker = 0 ; walker < topRange ; walker ++ ) { System . out . println ( walker ) ; } } }
+private class QuickCycle { private static void main ( String [ ] args ) { float loopCount ; for ( loopCount = 0 ; loopCount < 5 ; loopCount ++ ) { System . out . println ( ( int ) loopCount ) ; } } }
+protected class BriefRepeat { protected static void main ( String [ ] args ) { float cycleVal = 0 ; while ( cycleVal < 5 ) { System . out . println ( ( int ) cycleVal ) ; cycleVal ++ ; } } }
+public class SizeCheck { public static void main ( String [ ] args ) { float lengthVal = 7 ; float widthVal = 10 ; if ( lengthVal > widthVal ) { System . out . println ( " x is greater " ) ; } } }
+private class NotSmaller { private static void main ( String [ ] args ) { float leftSide = 7 ; float rightSide = 10 ; if ( leftSide <= rightSide == false ) { System . out . println ( " x is greater " ) ; } } }
+protected class ScaleValue { protected static void main ( String [ ] args ) { int [ ] valueSet = { 1 , 2 , 3 , 4 , 5 } ; valueSet [ 2 ] = valueSet [ 2 ] * 2 ; System . out . println ( valueSet [ 2 ] ) ; } }
+public class ItemScale { public static void main ( String [ ] args ) { int [ ] numberList = { 1 , 2 , 3 , 4 , 5 } ; numberList [ 2 ] *= 2 ; System . out . println ( numberList [ 2 ] ) ; } }
+private class IncrStep { private static void main ( String [ ] args ) { float indexLoop ; for ( indexLoop = 1 ; indexLoop < 4 ; indexLoop ++ ) { System . out . println ( ( int ) indexLoop ) ; } } }
+protected class StepAdvance { protected static void main ( String [ ] args ) { float countIndex ; for ( countIndex = 1 ; countIndex <= 4 ; countIndex ++ ) { System . out . println ( ( int ) countIndex ) ; } } }
+public class OriginZero { public static void main ( String [ ] args ) { float zero = 0 ; System . out . println ( ( int ) zero ) ; } }
+private class FirstPos { private static void main ( String [ ] args ) { float startVal = 1 ; System . out . println ( ( int ) startVal ) ; } }
